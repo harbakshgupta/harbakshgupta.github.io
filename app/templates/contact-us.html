@@ -1,60 +1,99 @@
 {% extends 'base_template.html' %}
 
+{% block body_class %}
+  contact-page
+{% endblock %}
+
 {% block main %}
 
 <div class="main">
-<div class="section section-gray">
-<div class="container">
-<div class="row">
-<div class="col-md-10 ml-auto mr-auto text-center">
-<h2 class="title">Get in touch with us</h2>
-<p> <i class="nc-icon nc-globe-2"></i> Mailing Address: Gupta Complex, First Floor, Nanhera Road, Kuldeep Nagar, Ambala Cantt, Haryana 133004</p>
-<p> <i class="fa fa-phone"></i> Contact Nos:- +91-7056560081, +91-7056560082</p>
-<p> <i class="fa fa-envelope"></i> Email Id(s):- info.curezonepharma@gmail.com, sales.curezonepharma@gmail.com </p>
+    <br><br>
+    <div class="section section-black">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 ml-auto mr-auto">
+                    <div class="card card-contact no-transition">
+                        <h3 class="card-title text-center">Contact Us</h3>
+                        <div class="row">
+                            <div class="col-md-5 ml-auto">
+                                <div class="card-body">
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-info">
+                                            <i class="nc-icon nc-pin-3" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">Find us at the office</h4>
+                                            <p> Gupta Complex, First Floor,<br>
+                                                Nanhera Road, Kuldeep Nagar,<br>
+                                                Ambala Cantt, <br>
+                                                Haryana<br>
+                                                India - 133004
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-danger">
+                                            <i class="nc-icon nc-badge" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">Give us a ring</h4>
+                                            <p> +91-7056560081,<br>
+                                                +91-7056560082
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 mr-auto">
+                                <form role="form" id="contact-form" method="post">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">First name</label>
+                                                    <input type="text" name="name" class="form-control" placeholder="First Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Last name</label>
+                                                    <input type="text" name="name" class="form-control" placeholder="Last Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Email address</label>
+                                            <input type="email" name="email" class="form-control" placeholder="Email" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Your message</label>
+                                            <textarea name="message" class="form-control" id="message" rows="6" placeholder="Message"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                    <input class="form-check-input" type="checkbox" value="">
+                                                    I'm not a robot !
+                                                    <span class="form-check-sign"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-primary pull-right">Send Message</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-<div class="row">
-<div class="col-md-6 ml-auto mr-auto text-center">
-<h3 class="title"><small>Find us on social networks</small></h3>
-<button class="btn btn-just-icon btn-facebook">
-<i class="fa fa-facebook"></i>
-</button>
-<button class="btn btn-just-icon btn-instagram">
-<i class="fa fa-instagram"></i>
-</button>
-</div>
-</div>
-<div class="row">
-<div class="col-md-6 ml-auto mr-auto text-center">
-<h3 class="title"><small>Or drop us a note</small></h3>
-<form class="contact">
-<div class="row">
-<div class="col-md-6">
-<input type="text" class="form-control" placeholder="First Name">
-</div>
-<div class="col-md-6">
-<input type="text" class="form-control" placeholder="Last Name">
-</div>
-</div>
-<div class="row">
-<div class="col-md-6">
-<input type="text" class="form-control" placeholder="Email">
-</div>
-<div class="col-md-6">
-<input type="text" class="form-control" placeholder="Subject">
-</div>
-</div>
-<textarea class="form-control" placeholder="Message" rows="7"></textarea>
-<div class="row">
-<div class="col-md-6 ml-auto mr-auto">
-<button class="btn btn-primary btn-block btn-round">Send </button>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
+
+<div id="contactUsMap" class="big-map"></div>
 
 {% endblock %}
