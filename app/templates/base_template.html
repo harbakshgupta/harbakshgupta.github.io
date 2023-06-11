@@ -25,6 +25,55 @@
             .async-hide {
             opacity: 0 !important
             }
+
+            /* Fixed/sticky icon bar (vertically aligned 50% from the top of the screen) */
+            .icon-bar {
+              position: fixed;
+              top: 50%;
+              -webkit-transform: translateY(-50%);
+              -ms-transform: translateY(-50%);
+              transform: translateY(-50%);
+            }
+
+            /* Style the icon bar links */
+            .icon-bar a {
+              display: block;
+              text-align: center;
+              padding: 16px;
+              transition: all 0.3s ease;
+              color: white;
+              font-size: 20px;
+            }
+
+            /* Style the social media icons with color, if you want */
+            .icon-bar a:hover {
+              background-color: #000;
+            }
+
+            .facebook {
+              background: #3B5998;
+              color: white;
+            }
+
+            .twitter {
+              background: #55ACEE;
+              color: white;
+            }
+
+            .google {
+              background: #dd4b39;
+              color: white;
+            }
+
+            .linkedin {
+              background: #007bb5;
+              color: white;
+            }
+
+            .youtube {
+              background: #bb0000;
+              color: white;
+            }
         </style>
     </head>
     <body class="{% block body_class %} {% endblock %} sidebar-collapse">
@@ -68,14 +117,14 @@
         </div>
         <footer class="footer footer-big footer-black">
             <div class="container-fluid">
-                <div class="row" style="margin-left: 60px">
-                    <div class="col-md-5 col-sm-7 col-4 mr-auto">
+                <div class="row">
+                    <div class="col-md-5 col-sm-10 col-12 ml-1 mr-auto mb-3">
                         <h6> About Curezone </h6>
                         As the leading pharmaceutical PCD company in India, we present a great chance for individuals to become our associates with a minimal investment. 
                         We provide a wide range of products and also facilitate the creation of new market segments based on demand. 
                         Our offerings include all products and services at competitive rates, ensuring a monopoly for the franchise.
                     </div>
-                    <div class="col-md-1 ml-auto mr-auto col-sm-2 col-4">
+                    <div class="col-md-1 mr-auto col-sm-2 col-1 mb-3">
                           <h6> Quick Links </h6>
                           <div class="links">
                             <ul class="uppercase-links stacked-links">
@@ -102,13 +151,13 @@
                             </ul>
                           </div>
                     </div>
-                    <div class="col-md-4 ml-auto mr-auto col-sm-2 col-4">
+                    <div class="col-md-4 ml-auto mr-auto col-sm-6 col-12 mb-3">
                       <h6> Contact Information </h6>
                       <b> <i class="fa fa-location-arrow"></i> Gupta Complex, First Floor, Nanhera Road, Kuldeep Nagar, Ambala Cantt, Haryana 133004 </b> </br>
                       <b> <i class="fa fa-phone"></i> +91-7056560081, +91-7056560082 </b> </br>
                       <b> <i class="fa fa-envelope"></i> info.curezonepharma@gmail.com, sales.curezonepharma@gmail.com </b>
                     </div>
-                    <div class="col-md-2 ml-auto mr-auto col-sm-2 col-4">
+                    <div class="col-md-1 ml-auto mr-auto col-sm-6 col-12 mb-3">
                       <h6> Follow us on </h6>
                         <div class="social-area">
                           <a style = "color:inherit;" href="https://m.facebook.com/curezonepharma">
