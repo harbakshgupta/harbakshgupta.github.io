@@ -7,19 +7,24 @@ from app import *
 
 main = Blueprint('main', __name__)
 
-@main.route('/', methods=['POST','GET'])
+@main.route('/')
 def index():
-    if request.method== 'GET':
-        return render_template('index.html')
+    return render_template('index.html')
     
 @main.route('/about-us')
 def about_us():
     return render_template('about-us.html')
 
-@main.route('/contact-us')
+@main.route('/contact-us', methods=['POST','GET'])
 def contact_us():
+    if request.method=="POST":
+        pass
     return render_template('contact-us.html')
 
 @main.route('/our-products')
 def products():
     return render_template('product-page.html')
+
+@main.route('/all-products')
+def products_list():
+    return render_template('product-list.html')
