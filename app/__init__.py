@@ -2,32 +2,34 @@ import os
 from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint
 from tempfile import mkdtemp
 from functools import wraps
-# from flask_mail import Mail, Message
+from flask_mail import Mail, Message
 # from flask_recaptcha import ReCaptcha
 import requests
 import json
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 
-## Configuring Flask-Mail
-# app.config.update(
-# 	DEBUG=True,
-# 	#EMAIL SETTINGS
-# 	MAIL_SERVER='smtp.gmail.com',
-# 	MAIL_PORT=465,
-# 	MAIL_USE_SSL=True,
-#     MAIL_USERNAME = '#',
-#     MAIL_PASSWORD = '#'
-# 	)
-# mail = Mail(app)
+# Configuring Flask-Mail
+app.config.update(
+	DEBUG=True,
 
-# def send_mail(title,sender,recipients,message_html):
-#     msg = Message(title,
-#         sender=sender,
-#         recipients=recipients)
-#     msg.html = message_html
-#     mail.send(msg)
-#     return ("Mail Sent")
+	#EMAIL SETTINGS
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+    MAIL_USERNAME = os.getenv("MAIL_USERNAME"),
+    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD"),
+	)
+mail = Mail(app)
+
+def send_mail(title,sender,recipients,message_html):
+    print(app.config.get("MAIL_USERNAME"), app.config.get("MAIL_PASSWORD"))
+    msg = Message(title,
+        sender=sender,
+        recipients=recipients)
+    msg.html = message_html
+    mail.send(msg)
+    return ("Mail Sent")
 
 ## reCaptcha
 # recaptcha = ReCaptcha(app=app)

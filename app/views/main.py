@@ -18,7 +18,20 @@ def about_us():
 @main.route('/contact-us', methods=['POST','GET'])
 def contact_us():
     if request.method=="POST":
-        pass
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        contact_no = request.form["contact_no"]
+        email = request.form["email"]
+        message = request.form["message"]
+
+        ## Composing Mail
+        title= f"Message from - {first_name} {last_name}"
+        sender="info.curezonepharma@gmail.com"
+        recipients = [sender]
+        message_html = f"Message from Website by <b>{first_name} {last_name}</b> <br> <b>Contact No:-</b> {contact_no} <br> <b>Email:-</b> {email} <br> <b>Message:-</b> {message}"
+        # send_mail(title,sender,recipients,message_html) # Sending Mail
+        ## End of Mail
+
     return render_template('contact-us.html')
 
 @main.route('/our-products')
