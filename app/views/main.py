@@ -1,5 +1,6 @@
 import random
 import string
+import re
 from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint
 from passlib.hash import sha256_crypt as sha
 # from flask_mail import Mail, Message
@@ -24,13 +25,19 @@ def contact_us():
         email = request.form["email"]
         message = request.form["message"]
 
-        ## Composing Mail
-        title= f"Message from Website by - {first_name} {last_name}"
-        sender="sales.curezonepharma@gmail.com"
-        recipients = ["info.curezonepharma@gmail.com"]
-        message_html = f"Message from Website by <b>{first_name} {last_name}</b> <br> <b>Contact No:-</b> {contact_no} <br> <b>Email:-</b> {email} <br> <b>Message:-</b> {message}"
-        send_mail(title,sender,recipients,message_html) # Sending Mail
-        ## End of Mail
+        if not contact_no.isnumeric() or len(contact_no)>10:
+            flash("Invalid Contact Number, please try again!","danger")
+        elif len(message)==0:
+            flash("Empty Message, please try again!","danger")
+        else:
+            print("Success")
+            title= f"Message from Website by - {first_name} {last_name}"
+            sender="sales.curezonepharma@gmail.com"
+            recipients = ["info.curezonepharma@gmail.com"]
+            message_html = f"Message from Website by <b>{first_name} {last_name}</b> <br> <b>Contact No:-</b> {contact_no} <br> <b>Email:-</b> {email} <br> <b>Message:-</b> {message}"
+            send_mail(title,sender,recipients,message_html) # Sending Mail
+            flash("Request Sent Successfully","success")
+        return redirect(url_for("main.contact_us"))
 
     return render_template('contact-us.html')
 
