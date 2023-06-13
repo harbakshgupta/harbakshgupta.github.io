@@ -37,7 +37,6 @@ def contact_us():
             message_html = f"Message from Website by <b>{first_name} {last_name}</b> <br> <b>Contact No:-</b> {contact_no} <br> <b>Email:-</b> {email} <br> <b>Message:-</b> {message}"
             send_mail(title,sender,recipients,message_html) # Sending Mail
             flash("Request Sent Successfully","success")
-        return redirect(url_for("main.contact_us"))
 
     return render_template('contact-us.html')
 
