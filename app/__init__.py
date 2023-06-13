@@ -3,11 +3,15 @@ from flask import Flask, request, render_template, flash, redirect, url_for, ses
 from tempfile import mkdtemp
 from functools import wraps
 from flask_mail import Mail, Message
-# from flask_recaptcha import ReCaptcha
+from flask_session import Session
 import requests
 import json
 
 app = Flask(__name__, static_url_path="", static_folder="static")
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_FILE_DIR'] = mkdtemp()
+
+Session(app)
 
 # Configuring Flask-Mail
 app.config.update(
@@ -30,17 +34,7 @@ def send_mail(title,sender,recipients,message_html):
     mail.send(msg)
     return ("Mail Sent")
 
-## reCaptcha
-# recaptcha = ReCaptcha(app=app)
-# SITE_KEY= "6Lc7b4gUAAAAAPvGrs6ExI4KCN11VaK5-AygiNDV"
-# SECRET_KEY = "6Lc7b4gUAAAAAFzUsJumv07rK7eeRFtXCEfIxhyT"
-# def is_human(captcha_response):
-#     # Validating recaptcha response from google server
-#     # Returns True captcha test passed for submitted form else returns False.
-#     payload = {'response':captcha_response, 'secret':SECRET_KEY}
-#     response = requests.post("https://www.google.com/recaptcha/api/siteverify", payload)
-#     response_text = json.loads(response.text)
-#     return response_text['success']
+
 
 # Importing Blueprints
 from app.views.main import main
