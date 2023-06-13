@@ -25,11 +25,11 @@ def contact_us():
         message = request.form["message"]
 
         ## Composing Mail
-        title= f"Message from - {first_name} {last_name}"
-        sender="info.curezonepharma@gmail.com"
-        recipients = [sender]
+        title= f"Message from Website by - {first_name} {last_name}"
+        sender="sales.curezonepharma@gmail.com"
+        recipients = ["info.curezonepharma@gmail.com"]
         message_html = f"Message from Website by <b>{first_name} {last_name}</b> <br> <b>Contact No:-</b> {contact_no} <br> <b>Email:-</b> {email} <br> <b>Message:-</b> {message}"
-        # send_mail(title,sender,recipients,message_html) # Sending Mail
+        send_mail(title,sender,recipients,message_html) # Sending Mail
         ## End of Mail
 
     return render_template('contact-us.html')
