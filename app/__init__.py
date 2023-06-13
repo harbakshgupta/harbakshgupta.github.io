@@ -10,26 +10,25 @@ import json
 app = Flask(__name__, static_url_path="", static_folder="static")
 
 # Configuring Flask-Mail
-app.config.update(
-	DEBUG=True,
+# app.config.update(
+# 	DEBUG=True,
 
-	#EMAIL SETTINGS
-	MAIL_SERVER='smtp.gmail.com',
-	MAIL_PORT=465,
-	MAIL_USE_SSL=True,
-    MAIL_USERNAME = os.getenv("MAIL_USERNAME"),
-    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD"),
-	)
-mail = Mail(app)
+# 	#EMAIL SETTINGS
+# 	MAIL_SERVER='smtp.gmail.com',
+# 	MAIL_PORT=465,
+# 	MAIL_USE_SSL=True,
+#     # MAIL_USERNAME = os.getenv("MAIL_USERNAME"),
+#     # MAIL_PASSWORD = os.getenv("MAIL_PASSWORD"),
+# 	)
+# mail = Mail(app)
 
-def send_mail(title,sender,recipients,message_html):
-    print(app.config.get("MAIL_USERNAME"), app.config.get("MAIL_PASSWORD"))
-    msg = Message(title,
-        sender=sender,
-        recipients=recipients)
-    msg.html = message_html
-    mail.send(msg)
-    return ("Mail Sent")
+# def send_mail(title,sender,recipients,message_html):
+#     msg = Message(title,
+#         sender=sender,
+#         recipients=recipients)
+#     msg.html = message_html
+#     mail.send(msg)
+#     return ("Mail Sent")
 
 ## reCaptcha
 # recaptcha = ReCaptcha(app=app)
