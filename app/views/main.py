@@ -25,7 +25,7 @@ def contact_us():
         email = request.form["email"]
         message = request.form["message"]
 
-        if not contact_no.isnumeric() or len(contact_no)>10:
+        if not contact_no.isnumeric() or len(contact_no)!=10:
             flash("Invalid Contact Number, please try again!","danger")
         elif len(message)==0:
             flash("Empty Message, please try again!","danger")
