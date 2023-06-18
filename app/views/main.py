@@ -1,7 +1,7 @@
 import random
 import string
 import re
-from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint
+from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint, send_from_directory
 from passlib.hash import sha256_crypt as sha
 # from flask_mail import Mail, Message
 from app import *
@@ -49,3 +49,7 @@ def products():
 @main.route('/all-products')
 def products_list():
     return render_template('product-list.html')
+
+@app.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
