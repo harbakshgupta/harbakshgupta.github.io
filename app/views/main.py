@@ -51,7 +51,11 @@ def products_list():
     return render_template('product-list.html')
 
 @app.route('/sitemap.xml')
-def static_from_root():
+def sitemap_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
+
+@app.route('/robots.txt')
+def robots_txt_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
 
 @main.route('/blog')
