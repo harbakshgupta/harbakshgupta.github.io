@@ -22,7 +22,6 @@
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/assets/css/paper-kit.min7317.css" rel="stylesheet" />
         <link href="/assets/demo/demo.css" rel="stylesheet" />
-        <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
         <style>
             .async-hide {
             opacity: 0 !important
@@ -88,7 +87,7 @@
                         </a>
                       </div>
                     </li>
-                    <!-- <li class="nav-item"> <a class="nav-link" href="{{ url_for('main.blog') }}"> Blog </a> </li> -->
+                    <li class="nav-item"> <a class="nav-link" href="{{ url_for('main.blog') }}"> Blog </a> </li>
                     <li class="nav-item"> <a class="nav-link" href="{{ url_for('main.contact_us') }}"> Contact Us </a> </li>
                     {% if admin %}
                       <li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.dashboard') }}"> Add Posts </a> </li>
@@ -129,11 +128,11 @@
                                     <b>Our Products</b>
                                     </a>
                                 </li>
-                                <!-- <li>
+                                <li>
                                     <a href="{{ url_for('main.blog') }}">
                                     <b>Blog</b>
                                     </a>
-                                </li> -->
+                                </li>
                                 <li>
                                     <a href="{{ url_for('main.contact_us') }}">
                                     <b>Contact Us</b>
@@ -383,13 +382,6 @@
             demo.initContactUsMap();
           });
         </script>
-        <script>
-            ClassicEditor
-                .create( document.querySelector( '#editor' ) )
-                .catch( error => {
-                    console.error( error );
-                } );
-         </script>
 
       <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"79672d389c549a75","version":"2022.11.3","r":1,"token":"1b7cbb72744b40c580f8633c6b62637e","si":100}' crossorigin="anonymous"></script>
     </body>
