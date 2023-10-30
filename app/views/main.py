@@ -10,14 +10,17 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    admin = session.get("admin",False)
+    return render_template('index.html', admin=admin)
     
 @main.route('/about-us')
 def about_us():
-    return render_template('about-us.html')
+    admin = session.get("admin",False)
+    return render_template('about_us.html', admin=admin)
 
 @main.route('/contact-us', methods=['POST','GET'])
 def contact_us():
+    admin = session.get("admin",False)
     if request.method=="POST":
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
@@ -40,15 +43,17 @@ def contact_us():
             flash("Query Sent Successfully","success")
         return redirect(url_for("main.contact_us"))
 
-    return render_template('contact-us.html')
+    return render_template('contact_us.html', admin=admin)
 
 @main.route('/our-products')
 def products():
-    return render_template('product-page.html')
+    admin = session.get("admin",False)
+    return render_template('product_page.html', admin=admin)
 
 @main.route('/all-products')
 def products_list():
-    return render_template('product-list.html')
+    admin = session.get("admin",False)
+    return render_template('product_list.html', admin=admin)
 
 @app.route('/sitemap.xml')
 def sitemap_from_root():
@@ -60,4 +65,10 @@ def robots_txt_from_root():
 
 @main.route('/blog')
 def blog():
-    return render_template('blog.html')
+    admin = session.get("admin",False)
+    return render_template('blog.html', admin=admin)
+
+@main.route('/blog-post/<int:post_id>')
+def blog_post(post_id):
+    admin = session.get("admin",False)
+    return render_template('blog_post.html', admin=admin)
