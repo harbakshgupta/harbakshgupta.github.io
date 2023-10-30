@@ -13,7 +13,12 @@ load_dotenv()
 app = Flask(__name__, static_url_path="", static_folder="static")
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = mkdtemp()
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("POSTGRES_URL", "postgresql://postgres:postgres@localhost:5432/curezonepharma")
+
+# Forming Postgres URL from .env file
+postgres_url = os.getenv("POSTGRES_URL", "postgresql://postgres:postgres@localhost:5432/curezonepharma").split("://")
+postgres_url[0] = postgres_url[0]+"ql"
+postgres_url = "://".join(postgres_url)
+app.config['SQLALCHEMY_DATABASE_URI'] = postgres_url
 
 Session(app)
 db.init_app(app)
