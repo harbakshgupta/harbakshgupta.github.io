@@ -13,5 +13,5 @@ instance/
 config.cfg
 __pycache__*
 \.vscode/
-env
+.env
 win.txt

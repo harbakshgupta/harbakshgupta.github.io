@@ -1,17 +1,25 @@
+from dotenv import load_dotenv
 import os
 from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint
 from tempfile import mkdtemp
 from functools import wraps
 from flask_mail import Mail, Message
 from flask_session import Session
+from .models.models import db
 import requests
 import json
 
+load_dotenv()
 app = Flask(__name__, static_url_path="", static_folder="static")
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = mkdtemp()
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("POSTGRES_URL", "postgresql://postgres:postgres@localhost:5432/curezonepharma")
 
 Session(app)
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 # Configuring Flask-Mail
 app.config.update(

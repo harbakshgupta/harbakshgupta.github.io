@@ -3,7 +3,7 @@ import string
 import re
 from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint, send_from_directory
 from passlib.hash import sha256_crypt as sha
-# from flask_mail import Mail, Message
+from ..models.models import Admin
 from app import *
 
 main = Blueprint('main', __name__)
@@ -72,3 +72,10 @@ def blog():
 def blog_post(post_id):
     admin = session.get("admin",False)
     return render_template('blog_post.html', admin=admin)
+
+# @main.route('/populate-admin')
+# def populate_admin():
+#     admin = Admin("username", sha.hash("password"))
+#     db.session.add(admin)
+#     db.session.commit()
+#     return "Admin Populated"
