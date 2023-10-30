@@ -19,50 +19,41 @@
   <div class="section">
     <div class="blog-4">
       <div class="container">
-        <div class="row">
+        {% for post in posts %}
+          {% if loop.index0 is divisibleby 2 %}
+            <div class="row">
+          {% endif %}
           <div class="col-md-6">
             <div class="card card-plain card-blog text-center">
               <div class="card-image">
-                <a href="javascript:;">
-                  <img class="img img-raised" src="assets/img/sections/val-vesa.jpg" />
-                </a>
+                <img class="img img-raised" src="{{ post.image }}"/>
               </div>
               <div class="card-body">
-                <h6 class="card-category text-warning">Travel</h6>
                 <h3 class="card-title">
-                  <a href="javascript:;">Learning different cultures through travel</a>
+                  <a href="{{ url_for('main.blog_post', slug=post.slug)}}"> {{ post.title }}</a>
                 </h3>
                 <p class="card-description">
-                  A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I
-                  enjoy with my whole heart. I am alone, and feel the charm of existence in this spot.
+                  {{ post.short_desc }}
                 </p>
-                <br />
-                <a href="javascript:;" class="btn btn-warning btn-round"> Read More</a>
+              </br>
+                <div class="row d-flex flex-wrap align-items-center">
+                  <div class="col-md-6">
+                    <a href="{{ url_for('main.blog_post', slug=post.slug)}}" class="btn btn-round"> Read More</a>
+                  </div>
+                  <div class="col-md-6 mr-auto" valign="center" style="font-size: medium;">
+                    <i class="fa fa-calendar" aria-hidden="true"></i> {{ post.date }}
+                  </div>
+                </div>
+                {% if admin %}
+                  <a href="{{ url_for('admin.delete_post', slug=post.slug)}}" class="btn btn-error btn-round"> Delete Post </a>
+                {% endif %}
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="card card-plain card-blog text-center">
-              <div class="card-image">
-                <a href="javascript:;">
-                  <img class="img img-raised" src="assets/img/sections/rodrigo-ardilha.jpg" />
-                </a>
-              </div>
-              <div class="card-body">
-                <h6 class="card-category text-info">Travel</h6>
-                <h3 class="card-title">
-                  <a href="javascript:;">Kick-Ass ways to disappear like a Ninja!</a>
-                </h3>
-                <p class="card-description">
-                  In the end, the judge ruled that Levandowski could be brought in and examined, but that each question
-                  asked to him would be vetted in advance and should have some basis in evidence.
-                </p>
-                <br />
-                <a href="javascript:;" class="btn btn-primary btn-round"> Read More</a>
-              </div>
+          {% if loop.index0 is not divisibleby 2 %}
             </div>
-          </div>
-        </div>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
   </div>

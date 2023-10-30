@@ -32,28 +32,36 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 ml-auto mr-auto">
-                        <form class="settings-form">
+                        <form class="settings-form" action="{{ url_for('admin.dashboard') }}" method="post">
                             <div class="form-group">
                                 <label>Post Title</label>
-                                <input type="text" class="form-control border-input" placeholder="Job Title">
+                                <input type="text" name="title" class="form-control border-input" placeholder="Job Title">
                             </div>
                             <div class="form-group">
-                                <label>Post Description</label>
-                                <textarea class="form-control textarea-limited"
-                                    placeholder="This is a textarea limited to 150 characters." rows="3"
-                                    maxlength="150"></textarea>
-                                <h5><small><span id="textarea-limited-message" class="pull-right">150 characters
-                                            left</span></small></h5>
+                                <label>URL Slug</label>
+                                <input type="text" name="slug" class="form-control border-input" placeholder="Enter URL Slug">
+                            </div>
+                            <div class="form-group">
+                                <label>Post Short Description</label>
+                                <textarea name="description" class="form-control textarea-limited"
+                                placeholder="This is a textarea limited to 300 characters." rows="3"
+                                maxlength="300"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Post Content</label>
+                                <textarea name="content" class="form-control textarea-limited"
+                                    placeholder="This is a textarea limited to 1000 characters." rows="3"
+                                    maxlength="1000"></textarea>
                             </div>
                             <ul class="notifications">
                                 <li class="notification-item">
                                     Visiblity
-                                    <input type="checkbox" data-toggle="switch" checked="" data-on-color="info"
+                                    <input type="checkbox" name="visible" data-toggle="switch" checked="" data-on-color="info"
                                         data-off-color="info"><span class="toggle"></span>
                                 </li>
                             </ul>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-wd btn-info btn-round">Save</button>
+                                <button type="submit" class="btn btn-wd btn-info btn-round">Submit</button>
                             </div>
                         </form>
                     </div>

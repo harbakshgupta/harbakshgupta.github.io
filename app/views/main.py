@@ -3,7 +3,7 @@ import string
 import re
 from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint, send_from_directory
 from passlib.hash import sha256_crypt as sha
-from ..models.models import Admin
+from ..models.models import blogPosts
 from app import *
 
 main = Blueprint('main', __name__)
@@ -66,12 +66,18 @@ def robots_txt_from_root():
 @main.route('/blog')
 def blog():
     admin = session.get("admin",False)
-    return render_template('blog.html', admin=admin)
+    posts = db.session.query(blogPosts).filter_by(visible=True).order_by(blogPosts.date).all()
+    print(posts)
+    return render_template('blog.html', **locals())
 
-@main.route('/blog-post/<int:post_id>')
-def blog_post(post_id):
+@main.route('/blog-post/<slug>')
+def blog_post(slug):
     admin = session.get("admin",False)
-    return render_template('blog_post.html', admin=admin)
+    post = db.session.execute(db.select(blogPosts).filter_by(slug=slug)).scalar()
+    if post is None:
+        flash("Blog Post Not Found","warning")
+        return redirect(url_for("main.blog"))
+    return render_template('blog_post.html', **locals())
 
 # @main.route('/populate-admin')
 # def populate_admin():

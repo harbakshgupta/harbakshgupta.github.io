@@ -21,13 +21,19 @@ class blogPosts(db.Model):
     title = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(100), nullable=False)
     content = db.Column(db.String(10000), nullable=False)
-    date = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.String(100), nullable=True)
     visible = db.Column(db.Boolean, nullable=False)
-    def __init__(self, title, image, content, date, visible):
+    slug = db.Column(db.String(100), nullable=False, unique=True)
+    short_desc = db.Column(db.String(1000), nullable=False)
+
+    def __init__(self, title, image, content, date, visible, slug, short_desc):
         self.title = title
         self.image = image
         self.content = content
         self.date = date
         self.visible = visible
+        self.slug = slug
+        self.short_desc = short_desc
+
     def __repr__(self) -> str:
         return f"{self.title}"

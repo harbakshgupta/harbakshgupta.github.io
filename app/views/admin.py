@@ -1,6 +1,7 @@
 import random
 import string
 import re
+import datetime
 from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint, send_from_directory
 from flask_session import Session
 from passlib.hash import sha256_crypt as sha
@@ -11,6 +12,7 @@ admin = Blueprint('admin', __name__, url_prefix='/admin')
 
 @admin.route('/login' , methods=['POST','GET'])
 def login():
+    isAdmin = session.get("admin",False)
     if request.method=="POST":
         user = request.form.get("username", "default")
         password = request.form.get("password", "default")
@@ -29,17 +31,51 @@ def login():
             flash("Invalid Credentials, please try again!","danger")
             return redirect(url_for("admin.login"))
     else:
-        return render_template('admin/login.html')
+        return render_template('admin/login.html', admin=isAdmin)
 
-@admin.route('/dashboard')
+@admin.route('/dashboard', methods=['POST','GET'])
 def dashboard():
-    admin = session.get("admin",False)
-    if admin:
-        return render_template('admin/dashboard.html', admin=admin)
+    isAdmin = session.get("admin",False)
+    if request.method=="POST":
+        title = request.form.get("title", "default")
+        image = "/assets/img/contact_us_bg.jpg"
+        content = request.form.get("content", "default")
+        visible = request.form.get("visible", "off")
+        slug = request.form.get("slug", "default")
+        short_desc = request.form.get("description", "default")
+        date = None
+        print(visible)
+        if visible == "on":
+            date = datetime.datetime.now().strftime("%d %B, %Y")
+            visible = True
+        else:
+            visible = False
+        if len(title)==0 or len(image)==0 or len(content)==0 or len(slug)==0 or len(short_desc)==0:
+            flash("Empty Fields, please try again!","danger")
+        else:
+            newBlogPost = blogPosts(title=title, image=image, content=content, date=date, visible=visible, slug=slug, short_desc=short_desc)
+            db.session.add(newBlogPost)
+            db.session.commit()
+            flash("Blog Post Added Successfully","success")
+        return redirect(url_for("admin.dashboard"))
+    if isAdmin:
+        return render_template('admin/dashboard.html', admin=isAdmin)
     else:
         return redirect(url_for("admin.login"))
 
 @admin.route('/logout')
 def logout():
     session.pop("admin", False)
+    flash("Logged Out","success")
     return redirect(url_for("admin.login"))
+
+@admin.route('/delete-post/<slug>')
+def delete_post(slug):
+    isAdmin = session.get("admin",False)
+    if isAdmin:
+        db.session.query(blogPosts).filter_by(slug=slug).delete()
+        db.session.commit()
+        flash("Blog Post Deleted Successfully","success")
+        return redirect(url_for("admin.dashboard"))
+    else:
+        return redirect(url_for("admin.login"))
