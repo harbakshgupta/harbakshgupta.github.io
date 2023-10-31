@@ -13,24 +13,6 @@
         <div class="profile-content section">
             <div class="container">
                 <div class="row">
-                    <div class="profile-picture">
-                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                            <div class="fileinput-new img-no-padding">
-                                <img src="/assets/img/carousel-bg-3.jpg" alt="...">
-                            </div>
-                            <div class="fileinput-preview fileinput-exists img-no-padding"></div>
-                            <div>
-                                <span class="btn btn-outline-default btn-file btn-round"><span class="fileinput-new">Change
-                                        Photo</span><span class="fileinput-exists">Change</span><input type="file"
-                                        name="..."></span>
-                                <br />
-                                <a href="#paper-kit" class="btn btn-link btn-danger fileinput-exists"
-                                    data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6 ml-auto mr-auto">
                         <form class="settings-form" action="{{ url_for('admin.dashboard') }}" method="post">
                             <div class="form-group">
@@ -42,16 +24,20 @@
                                 <input type="text" name="slug" class="form-control border-input" placeholder="Enter URL Slug">
                             </div>
                             <div class="form-group">
+                                <label>Image URL</label>
+                                <input type="text" name="image" class="form-control border-input" placeholder="Image URL (Should be of format /assets/img/blog/[filename])">
+                            </div>
+                            <div class="form-group">
                                 <label>Post Short Description</label>
                                 <textarea name="description" class="form-control textarea-limited"
-                                placeholder="This is a textarea limited to 300 characters." rows="3"
-                                maxlength="300"></textarea>
+                                placeholder="This is a textarea limited to 1000 characters." rows="3"
+                                maxlength="1000"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Post Content</label>
                                 <textarea name="content" class="form-control textarea-limited"
-                                    placeholder="This is a textarea limited to 1000 characters." rows="3"
-                                    maxlength="1000"></textarea>
+                                    placeholder="This is a textarea limited to 5000 characters." rows="3"
+                                    maxlength="5000"></textarea>
                             </div>
                             <ul class="notifications">
                                 <li class="notification-item">

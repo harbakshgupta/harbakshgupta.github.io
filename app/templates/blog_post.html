@@ -19,33 +19,24 @@
         <div class="row">
           <div class="col-md-10 ml-auto mr-auto">
             <div class="text-center">
-              <h6 class="title-uppercase">{{ post.date }}</h6>
+              <h5 class="title-uppercase">Posted on {{ post.date }}</h5>
             </div>
           </div>
           <div class="col-md-8 ml-auto mr-auto">
-            <a href="javascrip: void(0);">
-              <div class="card" data-radius="none"
-                style="background-image: url('/assets/img/contact_us_bg.jpf');"></div>
-            </a>
+              <div class="card" data-radius="none" style="background-image: url('{{ post.image }}');"></div>
             <div class="article-content">
-              {{ post.content }}
+              {{ post.content|safe }}
             </div>
             <br />
             <div class="article-footer">
               <div class="container">
-                <div class="row">
+                <div class="row"  style="text-align: right;">
                   <div class="col-md-4 ml-auto">
                     <div class="sharing">
                       <h5>Spread the word</h5>
-                      <button class="btn btn-just-icon btn-twitter">
-                        <i class="fa fa-twitter"></i>
-                      </button>
-                      <button class="btn btn-just-icon btn-facebook">
-                        <i class="fa fa-facebook"> </i>
-                      </button>
-                      <button class="btn btn-just-icon btn-google">
-                        <i class="fa fa-google"> </i>
-                      </button>
+                        <i class="fa fa-2x fa-twitter"></i> &nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-2x fa-facebook"> </i> &nbsp;
+                        <i class="fa fa-2x fa-google"> </i>
                     </div>
                   </div>
                 </div>

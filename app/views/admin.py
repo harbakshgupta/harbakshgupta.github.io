@@ -38,7 +38,7 @@ def dashboard():
     isAdmin = session.get("admin",False)
     if request.method=="POST":
         title = request.form.get("title", "default")
-        image = "/assets/img/contact_us_bg.jpg"
+        image = request.form.get("image", "default")
         content = request.form.get("content", "default")
         visible = request.form.get("visible", "off")
         slug = request.form.get("slug", "default")
