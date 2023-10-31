@@ -1,0 +1,58 @@
+{% extends "base_template.html" %}
+
+{% block body_class %}
+  admin-dashboard
+{% endblock %}
+
+{% block main %}
+    <div class="wrapper">
+        <div class="page-header page-header-xs settings-background"
+            style="background-image: url('/assets/img/carousel-bg-3.jpg');">
+            <div class="filter"></div>
+        </div>
+        <div class="profile-content section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto">
+                        <form class="settings-form" action="{{ url_for('admin.dashboard') }}" method="post">
+                            <div class="form-group">
+                                <label>Post Title</label>
+                                <input type="text" name="title" class="form-control border-input" placeholder="Job Title">
+                            </div>
+                            <div class="form-group">
+                                <label>URL Slug</label>
+                                <input type="text" name="slug" class="form-control border-input" placeholder="Enter URL Slug">
+                            </div>
+                            <div class="form-group">
+                                <label>Image URL</label>
+                                <input type="text" name="image" class="form-control border-input" placeholder="Image URL (Should be of format /assets/img/blog/[filename])">
+                            </div>
+                            <div class="form-group">
+                                <label>Post Short Description</label>
+                                <textarea name="description" class="form-control textarea-limited"
+                                placeholder="This is a textarea limited to 1000 characters." rows="3"
+                                maxlength="1000"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Post Content</label>
+                                <textarea name="content" class="form-control textarea-limited"
+                                    placeholder="This is a textarea limited to 5000 characters." rows="3"
+                                    maxlength="5000"></textarea>
+                            </div>
+                            <ul class="notifications">
+                                <li class="notification-item">
+                                    Visiblity
+                                    <input type="checkbox" name="visible" data-toggle="switch" checked="" data-on-color="info"
+                                        data-off-color="info"><span class="toggle"></span>
+                                </li>
+                            </ul>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-wd btn-info btn-round">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

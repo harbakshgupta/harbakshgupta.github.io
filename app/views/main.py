@@ -3,21 +3,24 @@ import string
 import re
 from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint, send_from_directory
 from passlib.hash import sha256_crypt as sha
-# from flask_mail import Mail, Message
+from ..models.models import blogPosts
 from app import *
 
 main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    admin = session.get("admin",False)
+    return render_template('index.html', admin=admin)
     
 @main.route('/about-us')
 def about_us():
-    return render_template('about-us.html')
+    admin = session.get("admin",False)
+    return render_template('about_us.html', admin=admin)
 
 @main.route('/contact-us', methods=['POST','GET'])
 def contact_us():
+    admin = session.get("admin",False)
     if request.method=="POST":
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
@@ -40,15 +43,17 @@ def contact_us():
             flash("Query Sent Successfully","success")
         return redirect(url_for("main.contact_us"))
 
-    return render_template('contact-us.html')
+    return render_template('contact_us.html', admin=admin)
 
 @main.route('/our-products')
 def products():
-    return render_template('product-page.html')
+    admin = session.get("admin",False)
+    return render_template('product_page.html', admin=admin)
 
 @main.route('/all-products')
 def products_list():
-    return render_template('product-list.html')
+    admin = session.get("admin",False)
+    return render_template('product_list.html', admin=admin)
 
 @app.route('/sitemap.xml')
 def sitemap_from_root():
@@ -60,4 +65,23 @@ def robots_txt_from_root():
 
 @main.route('/blog')
 def blog():
-    return render_template('blog.html')
+    admin = session.get("admin",False)
+    posts = db.session.query(blogPosts).filter_by(visible=True).order_by(blogPosts.date).all()
+    print(posts)
+    return render_template('blog.html', **locals())
+
+@main.route('/blog-post/<slug>')
+def blog_post(slug):
+    admin = session.get("admin",False)
+    post = db.session.execute(db.select(blogPosts).filter_by(slug=slug)).scalar()
+    if post is None:
+        flash("Blog Post Not Found","warning")
+        return redirect(url_for("main.blog"))
+    return render_template('blog_post.html', **locals())
+
+# @main.route('/populate-admin')
+# def populate_admin():
+#     admin = Admin("username", sha.hash("password"))
+#     db.session.add(admin)
+#     db.session.commit()
+#     return "Admin Populated"

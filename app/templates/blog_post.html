@@ -1,0 +1,50 @@
+{% extends "base_template.html" %}
+
+{% block body_class %}
+  blog-post
+{% endblock %}
+
+{% block main %}
+  <div class="page-header page-header-small" style="background-image: url('/assets/img/blog-bg.jpg');">
+    <div class="filter"></div>
+    <div class="content-center">
+        <div class="container">
+            <h2>{{ post.title }}</h2>
+        </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="section section-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 ml-auto mr-auto">
+            <div class="text-center">
+              <h5 class="title-uppercase">Posted on {{ post.date }}</h5>
+            </div>
+          </div>
+          <div class="col-md-8 ml-auto mr-auto">
+              <div class="card" data-radius="none" style="background-image: url('{{ post.image }}');"></div>
+            <div class="article-content">
+              {{ post.content|safe }}
+            </div>
+            <br />
+            <div class="article-footer">
+              <div class="container">
+                <div class="row"  style="text-align: right;">
+                  <div class="col-md-4 ml-auto">
+                    <div class="sharing">
+                      <h5>Spread the word</h5>
+                        <i class="fa fa-2x fa-twitter"></i> &nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-2x fa-facebook"> </i> &nbsp;
+                        <i class="fa fa-2x fa-google"> </i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
