@@ -14,7 +14,7 @@ app = Flask(__name__, static_url_path="", static_folder="static")
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = mkdtemp()
 app.permanent_session_lifetime = timedelta(days=30)
-app.secret_key = os.urandom(24)
+app.secret_key = "#%^^^S0M3R@ND0M5TR!NG$%$#"
 
 # Forming Postgres URL from .env file
 postgres_url = os.getenv("POSTGRES_URL", "postgresql://postgres:postgres@localhost:5432/curezonepharma").split("://")
