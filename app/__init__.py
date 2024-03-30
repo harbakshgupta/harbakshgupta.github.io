@@ -1,10 +1,10 @@
+from datetime import timedelta
 from dotenv import load_dotenv
 import os
 from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint
 from tempfile import mkdtemp
 from functools import wraps
 from flask_mail import Mail, Message
-from flask_session import Session
 from .models.models import db
 import requests
 import json
@@ -13,6 +13,8 @@ load_dotenv()
 app = Flask(__name__, static_url_path="", static_folder="static")
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = mkdtemp()
+app.permanent_session_lifetime = timedelta(days=30)
+app.secret_key = os.urandom(24)
 
 # Forming Postgres URL from .env file
 postgres_url = os.getenv("POSTGRES_URL", "postgresql://postgres:postgres@localhost:5432/curezonepharma").split("://")
@@ -20,7 +22,6 @@ postgres_url[0] = postgres_url[0]+"ql"
 postgres_url = "://".join(postgres_url)
 app.config['SQLALCHEMY_DATABASE_URI'] = postgres_url
 
-Session(app)
 db.init_app(app)
 
 with app.app_context():

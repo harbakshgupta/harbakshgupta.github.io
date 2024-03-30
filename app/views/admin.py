@@ -3,12 +3,12 @@ import string
 import re
 import datetime
 from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint, send_from_directory
-from flask_session import Session
 from passlib.hash import sha256_crypt as sha
 from ..models.models import Admin, blogPosts
 from app import *
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
+BLOG_IMAGE_PATH = "/assets/img/blog/"
 
 @admin.route('/login' , methods=['POST','GET'])
 def login():
@@ -21,6 +21,7 @@ def login():
         if result is not None:
             if result.username==user and sha.verify(password, result.password):
                 session["admin"] = True
+                session.permanent = True
                 flash("Login Successful","success")
                 return redirect(url_for("main.index"))
             else:
@@ -35,7 +36,7 @@ def login():
 
 @admin.route('/dashboard', methods=['POST','GET'])
 def dashboard():
-    isAdmin = session.get("admin",False)
+    isAdmin = session.get("admin", False)
     if request.method=="POST":
         title = request.form.get("title", "default")
         image = request.form.get("image", "default")
@@ -53,7 +54,8 @@ def dashboard():
         if len(title)==0 or len(image)==0 or len(content)==0 or len(slug)==0 or len(short_desc)==0:
             flash("Empty Fields, please try again!","danger")
         else:
-            newBlogPost = blogPosts(title=title, image=image, content=content, date=date, visible=visible, slug=slug, short_desc=short_desc)
+            image_url = os.path.join(BLOG_IMAGE_PATH, image)
+            newBlogPost = blogPosts(title=title, image=image_url, content=content, date=date, visible=visible, slug=slug, short_desc=short_desc)
             db.session.add(newBlogPost)
             db.session.commit()
             flash("Blog Post Added Successfully","success")
