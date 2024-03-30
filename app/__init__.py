@@ -2,6 +2,7 @@ from datetime import timedelta
 from dotenv import load_dotenv
 import os
 from flask import Flask, request, render_template, flash, redirect, url_for, session, Blueprint
+from flask_session import Session
 from tempfile import mkdtemp
 from functools import wraps
 from flask_mail import Mail, Message
@@ -11,10 +12,7 @@ import json
 
 load_dotenv()
 app = Flask(__name__, static_url_path="", static_folder="static")
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_FILE_DIR'] = mkdtemp()
-app.permanent_session_lifetime = timedelta(days=30)
-app.secret_key = os.urandom(24)
+app.secret_key = "@$$@%_S_O_M_E_S_E_C_R_E_T_K_E_Y_^%#@@@!"
 
 # Forming Postgres URL from .env file
 postgres_url = os.getenv("POSTGRES_URL", "postgresql://postgres:postgres@localhost:5432/curezonepharma").split("://")
@@ -27,6 +25,15 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
     db.reflect()
+
+
+app.config["SESSION_TYPE"] = "sqlalchemy"
+app.config["SESSION_SQLALCHEMY"] = db
+app.config["SESSION_PERMANENT"] = True
+app.config["SESSION_COOKIE_SECURE"] = True
+app.permanent_session_lifetime = timedelta(days=30)
+
+Session(app)
 
 # Configuring Flask-Mail
 app.config.update(
@@ -48,7 +55,6 @@ def send_mail(title,sender,recipients,message_html):
     msg.html = message_html
     mail.send(msg)
     return ("Mail Sent")
-
 
 
 # Importing Blueprints
